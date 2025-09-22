@@ -24,7 +24,7 @@ And this repo is a complete translation from the Matlab Project LoRaPHY created 
 *PHY header/payload CRC check
 *Low Data Rate Optimization (LDRO)
 
-## How compile and execute
+## How to compile and execute
 You'll need to download all the file.c and the file.h in the same directory, create a new project with your IDE and link them all togheter.
 For the Fast Fourier Transform I used the FFTW avaible for different O.S. at the link: https://fftw.org/
 You'll need to download the file.h of the library(fftw3.h) in the same directory and link it to the project.
