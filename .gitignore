@@ -1,0 +1,42 @@
+# File di build di CodeBlocks
+*.cbp
+*.layout
+*.depend
+*.workspace
+
+# File oggetto e eseguibili
+*.o
+*.obj
+*.exe
+*.out
+*.a
+*.so
+*.dll
+
+# Cartelle di build
+bin/
+obj/
+Debug/
+Release/
+build/
+dist/
+
+# File di sistema
+.DS_Store
+Thumbs.db
+
+# File temporanei
+*.swp
+*~
+*.tmp
+
+# Log files
+*.log
+
+# File di progetto IDE
+*.sln
+*.vcxproj
+*.filters
+
+# File di dipendenze
+*.d
