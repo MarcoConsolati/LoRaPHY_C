@@ -1,14 +1,12 @@
-#CLoRaPHY
-CLoRaPHY is a complete C language implementation of LoRa physical layer, including baseband modulation, baseband demodulation, encoding and decoding.
-CLoRaPHY is organized as some file.c and  file.h for ease of use.
+#LoRaPHY_C
+LoRaPHY_C is a C language complete implementation of LoRa physical layer, including baseband modulation, baseband demodulation, encoding and decoding.
+LoRaPHY_C is organized as some file.c and  file.h and a linked FFTW library for the Fast Fourier Transform.
 
 This repo is the implementation of the following paper:
 
-Zhenqiang Xu, Pengjin Xie, Shuai Tong, Jiliang Wang. From Demodulation to Decoding: Towards Complete LoRa PHY Understanding and Implementation. ACM Transactions on Sensor Networks 2022. [pdf]
+Zhenqiang Xu, Pengjin Xie, Shuai Tong, Jiliang Wang. From Demodulation to Decoding: Towards Complete LoRa PHY Understanding and Implementation. ACM Transactions on Sensor Networks 2022. avaible at: https://dl.acm.org/doi/10.1145/3546869
 
-And this repo is a complete translation from the Matlab Project LoRaPHY created by jkadbear avaible at:
-
-https://github.com/jkadbear/LoRaPHY
+And this repo is a complete translation from the Matlab Project LoRaPHY created by jkadbear avaible at: https://github.com/jkadbear/LoRaPHY
 
 ## Components
 *LoRa Modulator
@@ -37,4 +35,4 @@ You'll need to download the file.h of the library(fftw3.h) in the same directory
 
 ### Manual compiling
 ```bash
-gcc -o main.c lora_phy.c utility.c crcccitt.c 
+gcc -o main.c lora_phy.c utility.c crcccitt.c
