@@ -90,3 +90,9 @@ int main(int argc, char** argv) {
     freeLora(&Lora);
     return 0;
 }
+```
+
+## Manual compiling from Linux terminal
+```bash
+gcc yourcode.c utility.c main.c lora_phy.c crc_ccitt.c -lm -lfftw3 -o yourcode
+```
