@@ -53,13 +53,13 @@ Below is a complete example showing how to build a LoRaPHY object, encode and mo
 
 int main(int argc, char** argv) {
     LoRaPHY Lora;
-    buildLora(&Lora, 868.1e6, 7 , 125e3, 2e6);
+    buildLora(&Lora, 868.1e6, 7 , 125e3, 2e6); /*This function build Lora object struct with four parameters: Carrier frequency, Spreading factor, Bandwidth, Sampling frequency*/
     int64_t phy_payload1[] = {0x40, 0x11 , 0x22 , 0x33 , 0x44  , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 };
     int64_t data[] = {0x61 , 0x61 , 0x61 , 0x61, 0x61 , 0x61 , 0x61 , 0x61 , 0x61 , 0x61 };
     int64_t length_data = sizeof(data) / sizeof(data[0]);
     int64_t length_phy = sizeof(phy_payload1) / sizeof(phy_payload1[0]);
     int64_t* symbols = (int64_t*)malloc((length_data + length_phy)*sizeof(int64_t));
-    Lora.cr = 4;
+    Lora.cr = 4; /*To use the encode,decode,modulate,demodulate function you'll need to set before this parameters: Code rate, Crc enabled/disabled, Header enabled*/
     Lora.crc = 1;
     Lora.has_header = 1;
     Lora.payload_len = length_data + length_phy;
@@ -89,4 +89,4 @@ int main(int argc, char** argv) {
     }
     freeLora(&Lora);
     return 0;
-}```
+}
