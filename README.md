@@ -26,8 +26,8 @@ And this repo is a complete translation from the Matlab Project LoRaPHY created 
 
 ## How to compile and execute
 Git clone this repo or download all the file.c and the file.h in the same directory, create a new project with your preferred IDE and link them all togheter.
-For the Fast Fourier Transform I used the FFTW avaible for different O.S. at the link: https://fftw.org/
-You'll need to download the file.h of the library(fftw3.h) compatible with your O.S. in the same directory and link it to the project.
+For the Fast Fourier Transform I used the FFTW avaible for different O.S. at the link: https://fftw.org/  
+You'll need to download the file.h of the library(fftw3.h) compatible with your O.S. in the same directory and link it to the project.  
 For calculating the CRC checksum I used another library already included in this repo called "crc_ccitt" created by Lammert Bies and avaible at: https://github.com/lammertb/libcrc
  
 ## Prerequisites
@@ -37,10 +37,9 @@ For calculating the CRC checksum I used another library already included in this
 
 ## Manual compiling from Linux terminal
 ```bash
-gcc yourcode.c utility.c main.c lora_phy.c crc_ccitt.c -lm -lfftw3 -o yourcode ```
+gcc yourcode.c utility.c main.c lora_phy.c crc_ccitt.c -lm -lfftw3 -o yourcode
 
 ## Example of usage
-
 Below is a complete example showing how to build a LoRaPHY object, encode and modulate a payload, then demodulate and decode it. This demonstrates the full transmission and reception chain using the provided API.
 
 ```c
