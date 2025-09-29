@@ -35,10 +35,6 @@ For calculating the CRC checksum I used another library already included in this
 - Code::Blocks (or others IDE)
 - Git
 
-## Manual compiling from Linux terminal
-```bash
-gcc yourcode.c utility.c main.c lora_phy.c crc_ccitt.c -lm -lfftw3 -o yourcode
-
 ## Example of usage
 Below is a complete example showing how to build a LoRaPHY object, encode and modulate a payload, then demodulate and decode it. This demonstrates the full transmission and reception chain using the provided API.
 
@@ -94,6 +90,3 @@ int main(int argc, char** argv) {
     freeLora(&Lora);
     return 0;
 }```
-
-
-
