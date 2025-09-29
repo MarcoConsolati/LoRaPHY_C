@@ -1,4 +1,4 @@
-#include "lora_phy.h"
+/*#include "lora_phy.h"
 #include "crc_ccitt.h"
 #include "utility.h"
 #include <math.h>
@@ -11,12 +11,12 @@
 #include <string.h>
 
 
-///TEST DEMODULATE, DECODE///
 
+///TEST DEMODULATE, DECODE///
 int main(int argc, char** argv) {
 	LoRaPHY Lora;
     buildLora(&Lora, 868.1e6, 7 , 125e3, 2e6);
-    ///These bytes should be: 1byte(MHDR)+7bytes(MAC Payload)+4bytes(MIC)
+    ///These bytes should be: 1byte(MHDR)+7bytes(MAC Payload)+4bytes(MIC) ---> This payload structure is mandatory if you want to talk to a LoRaWAN gateway!
     int64_t phy_payload1[] = {0x40, 0x11 , 0x22 , 0x33 , 0x44  , 0x00 , 0x00 , 0x00 , 0x00 , 0x00 };
     int64_t data[] = {0x61 , 0x61 , 0x61 , 0x61, 0x61 , 0x61 , 0x61 , 0x61 , 0x61 , 0x61 };
     int64_t length_data = sizeof(data) / sizeof(data[0]);
@@ -39,13 +39,11 @@ int main(int argc, char** argv) {
     ResVetInt symbols_enc = encode(&Lora, symbols, Lora.payload_len);   ///TEST ENCODE, MODULATE///
     ResVetCmplx result;
     result = modulate(&Lora, symbols_enc.vet ,   symbols_enc.length_vet);
-
     ///This is the Demodulation part of the symbols
     ResVetInt symbols_dem;
-    symbols_dem = demodulate(&Lora, result.vet , result.size_chirp);///Demodulate from vector "vet" in the struct "result"///
+    symbols_dem = demodulate(&Lora, result.vet , result.size_chirp);	///Demodulate from vector "vet" in the struct "result"///
     ResVetInt symbols_dec;
     symbols_dec = decode(&Lora, symbols_dem.vet , 1 , symbols_dem.length_vet);
-
     ///free all the pointer allocated dynamically
     free(symbols_enc.vet);
     symbols_enc.vet = NULL;
@@ -64,7 +62,7 @@ int main(int argc, char** argv) {
     }
     freeLora(&Lora);
     return 0;
-}
+}*/
 
 
 
@@ -78,8 +76,6 @@ int main(int argc, char** argv) {
     stampaVetInt(symbols_dem.vet,symbols_dem.length_vet);
     free(sig_complex.vet);
     free(symbols_dem.vet);*/
-
-
 //    int64_t phy_payload2[] = {0x40, 0x11 , 0x22 , 0x33 , 0x44  , 0x20 , 0x00 , 0x00 , 0x00 , 0x00 };    /* + FRMPayload + MIC(4bytes/4ottects) */
 //    int64_t phy_payload3[] = {0x40, 0x11 , 0x22 , 0x33 , 0x44  , 0x40 , 0x00 , 0x00 , 0x00 , 0x00 };    /* + FRMPayload + MIC(4bytes/4ottects) */
 //    int64_t phy_payload4[] = {0x40, 0x11 , 0x22 , 0x33 , 0x44  , 0x60 , 0x00 , 0x00 , 0x00 , 0x00 };    /* + FRMPayload + MIC(4bytes/4ottects) */
@@ -89,21 +85,18 @@ int main(int argc, char** argv) {
 //    int64_t phy_payload8[] = {0x80, 0x11 , 0x22 , 0x33 , 0x44  , 0x40 , 0x00 , 0x00 , 0x00 , 0x00 };    /* + FRMPayload + MIC(4bytes/4ottects) */
 //    int64_t phy_payload9[] = {0x80, 0x11 , 0x22 , 0x33 , 0x44  , 0x60 , 0x00 , 0x00 , 0x00 , 0x00 };    /* + FRMPayload + MIC(4bytes/4ottects) */
 //    int64_t phy_payload10[] = {0x80, 0x11 , 0x22 , 0x33 , 0x44  , 0x80 , 0x00 , 0x00 , 0x00 , 0x00 };   /* + FRMPayload + MIC(4bytes/4ottects) */
-
 //    stampaVetCmplx( result.vet , result.size_chirp);
-
 /*    int64_t v = 0;
     const char filename[] = "file_written_cmplx.bin";
     v = writeCmplxFile(result.vet, result.size_chirp , filename);
     if(v){
-        printf("\nDati scritti con successo nel file %s.\n", filename);
+        printf("\nData written to file successfully %s.\n", filename);
     }else{
-        printf("\nErrore durante la scrittura nel file %s.\n", filename);
+        printf("\nError writing to file %s.\n", filename);
     }
     double complex* vet = (double complex*)calloc( result.size_chirp, sizeof(double complex));
     readCmplxFile(vet, result.size_chirp, filename);*/
 //    stampaVetCmplx(vet, result.size_chirp);
-
 
 
 
@@ -122,17 +115,19 @@ int main(int argc, char** argv) {
     matrice1 = whiten(&Lora, symbols_enc.vet,  symbols_enc.length_vet);
     int64_t* data_dew ;
     data_dew = dewhiten(&Lora, bytes,   symbols_enc.length_vet);
-//    printf("\nMatrice di dati dopo il whitening: \n");
+//    printf("\nData matrix after whitening: \n");
     for (int64_t i = 0; i < 10; i++) {
         for (int64_t j = 0; j < 10; j++) {
 //            printf("%"PRId64"\t", matrice1[i][j]);
         }
 //        printf("\n");
     }
-//    printf("\nDati dopo il dewhitening: \n");
+//    printf("\nData after dewhitening: \n");
     for (int64_t i = 0; i < 10; i++) {
 //        printf("%"PRId64"\t", data_dew[i]);
     }*/
+
+
 
     ///TEST CRC///
 /*    int64_t data[]={1,2,3,4,5,6,7,8,9,10};
@@ -140,6 +135,7 @@ int main(int argc, char** argv) {
     dataptr = data;
 	int64_t dataLength = (sizeof(data) / sizeof(data[0]));
 	calc_crc(&Lora, dataptr , dataLength);*/
+
 
 
     ///TEST PARSE_HEADER///
@@ -155,6 +151,7 @@ int main(int argc, char** argv) {
         printf("\nInvalid z=%"PRId64"",z);*/
 
 
+
     ///TEST GRAY CODING, HAMMING_DECODE///
 /*    int64_t dinint[] = {97,57,1,77,33,29,61,125,45,106,86,86,91,74,87,45,54,117,86,109,73,106,118,7,34,61,40,36,61,17,119,94,85,86,107,43,86,78,90,83};
     int64_t* din;
@@ -165,6 +162,7 @@ int main(int argc, char** argv) {
     for(int64_t i = 0; i < lengthdin; i++){
         printf("\nSymbols[%2"PRIu64"]=%3"PRIu64"", i , symbols[i]);
     }*/
+
 
 
     ///TEST DIAG_DEINTERLEAVING, HAMMING_DECODE, HAMMING_ENCODE///
@@ -191,6 +189,7 @@ int main(int argc, char** argv) {
     }*/
 
 
+
     ///TEST GRAY_DECODING, CALC_PAYLOAD_LEN///
 /*    int64_t symbols_i[] = {20,9,0,26,12,4,8,16,58,93,127,127,119,109,125,58,47,78,127,90,108,93,79,5,49,34,52,50,34,24,77,115,126,127,95,63,127,107,117,123};
     int64_t* symboli;
@@ -202,6 +201,7 @@ int main(int argc, char** argv) {
     int64_t len = calc_payload_len(&Lora, lengthsymbols , true);*/
 
 
+
     ///TEST DIAG_INTERLEAVE///
 /*    int64_t words[] = {6,9,5,25,5,10,254};
     int64_t* codewords;
@@ -209,8 +209,9 @@ int main(int argc, char** argv) {
     int64_t* symbols = diag_interleave(&Lora, codewords, 7,8);*/
 
 
-    ///Per usare correttamente ENCODE bisogna///
-    ///impostare i valori di Lora.cr,Lora.crc,Lora.has_header!
+
+    ///For testing ENCODE function you'll need///
+    ///to set Lora.cr,Lora.crc,Lora.has_header values!
     ///TEST ENCODE///
 /*    int64_t nibbles[] = {1,2,3,4,5,6,7,8,9,10};
     int64_t* symbols;
@@ -226,31 +227,32 @@ int main(int argc, char** argv) {
     }*/
 
 
-    ///Per usare correttamente DECODE bisogna///
-    ///impostare i valori di Lora.cr,Lora.crc,Lora.has_header!
+
+    ///For testing DECODE function you'll need///
+    ///to set Lora.cr,Lora.crc,Lora.has_header values!
     ///TEST DECODE///
 /*    int64_t* symbols_m;
 //14    int64_t symb_m[] = {97,57,1,77,33,29,61,125,45,106,86,86,91,74,87,45,54,117,86,109,73,106,118,7,34,61,40,36,61,17,119,94,85,86,107,43,86,78,90,83}; ///DATA=1,2,3,4,5,6,7,8,9,10(crc=1,cr=4)///
-//04    int64_t symb_m[] = {1,5,1,65,29,29,13,121,45,106,86,86,91,74,87,45,54,117,86,109,73,106,118,7,95,61,40,45,60,20,119,94};    ///DATA=1,2,3,4,5,6,7,8,9,10(crc=0,cr=4)///
-//13    int64_t symb_m[] = {29,53,5,49,37,1,1,97,45,106,86,86,91,74,87,54,117,86,109,73,106,118,34,61,40,36,61,17,119,85,86,107,43,86,78,90};   ///DATA=1,2,3,4,5,6,7,8,9,10(crc=1,cr=3)///
-//03    int64_t symb_m[] = {125,9,5,61,25,1,49,101,45,106,86,86,91,74,87,54,117,86,109,73,106,118,95,61,40,45,60,20,119};   ///DATA=1,2,3,4,5,6,7,8,9,10(crc=0,cr=3)///
-//12    int64_t symb_m[] = {97,5,25,49,29,29,13,97,45,106,86,86,91,74,54,117,86,109,73,106,34,61,40,36,61,17,85,86,107,43,86,78};   ///DATA=1,2,3,4,5,6,7,8,9,10(crc=1,cr=2)///
-//02    int64_t symb_m[] = {1,57,25,61,33,29,61,101,45,106,86,86,91,74,54,117,86,109,73,106,95,61,40,45,60,20}; ///DATA=1,2,3,4,5,6,7,8,9,10(crc=0,cr=2)///
-//11   int64_t symb_m[] = {97,9,1,49,25,97,1,121,45,106,86,86,16,54,117,86,109,127,34,61,40,36,46,85,86,107,43,64};    //DATA=1,2,3,4,5,6,7,8,9,10(crc=1,cr=1)///
-//01    int64_t symb_m[] = {1,53,1,61,37,97,49,125,45,106,86,86,16,54,117,86,109,127,95,61,40,45,46};   ///DATA=1,2,3,4,5,6,7,8,9,10(crc=0,cr=1)///
-//004    int64_t symb_m[] = {77,89,85,85,89,73,41,109,42,84,86,84,46,92,44,26,122,16,95,79,31,72,37,120,86,43,107,75,86,83,86,86};   ///DATA=1,2,3,4,5,6,7,8,9,10(crc=0,hasheader=0,cr=4)///
+//04    int64_t symb_m[] = {1,5,1,65,29,29,13,121,45,106,86,86,91,74,87,45,54,117,86,109,73,106,118,7,95,61,40,45,60,20,119,94};							///DATA=1,2,3,4,5,6,7,8,9,10(crc=0,cr=4)///
+//13    int64_t symb_m[] = {29,53,5,49,37,1,1,97,45,106,86,86,91,74,87,54,117,86,109,73,106,118,34,61,40,36,61,17,119,85,86,107,43,86,78,90};   			///DATA=1,2,3,4,5,6,7,8,9,10(crc=1,cr=3)///
+//03    int64_t symb_m[] = {125,9,5,61,25,1,49,101,45,106,86,86,91,74,87,54,117,86,109,73,106,118,95,61,40,45,60,20,119};   								///DATA=1,2,3,4,5,6,7,8,9,10(crc=0,cr=3)///
+//12    int64_t symb_m[] = {97,5,25,49,29,29,13,97,45,106,86,86,91,74,54,117,86,109,73,106,34,61,40,36,61,17,85,86,107,43,86,78};   						///DATA=1,2,3,4,5,6,7,8,9,10(crc=1,cr=2)///
+//02    int64_t symb_m[] = {1,57,25,61,33,29,61,101,45,106,86,86,91,74,54,117,86,109,73,106,95,61,40,45,60,20}; 											///DATA=1,2,3,4,5,6,7,8,9,10(crc=0,cr=2)///
+//11   int64_t symb_m[] = {97,9,1,49,25,97,1,121,45,106,86,86,16,54,117,86,109,127,34,61,40,36,46,85,86,107,43,64};    										///DATA=1,2,3,4,5,6,7,8,9,10(crc=1,cr=1)///
+//01    int64_t symb_m[] = {1,53,1,61,37,97,49,125,45,106,86,86,16,54,117,86,109,127,95,61,40,45,46};   													///DATA=1,2,3,4,5,6,7,8,9,10(crc=0,cr=1)///
+//004    int64_t symb_m[] = {77,89,85,85,89,73,41,109,42,84,86,84,46,92,44,26,122,16,95,79,31,72,37,120,86,43,107,75,86,83,86,86};   						///DATA=1,2,3,4,5,6,7,8,9,10(crc=0,hasheader=0,cr=4)///
     int64_t lengthcols = 1;
     symbols_m = symb_m;
     int64_t length_symb_m = sizeof(symb_m) / sizeof(symb_m[0]);
     int64_t** matrice = (int64_t**)malloc(length_symb_m * sizeof(int64_t*));
     if (matrice == NULL) {
-        perror("Errore nell'allocazione delle righe");
+        perror("Error: rows allocation failed");
         exit(EXIT_FAILURE);
     }
     for (int64_t i = 0; i < length_symb_m; i++) {
         matrice[i] = (int64_t*)malloc(lengthcols * sizeof(int64_t));
         if (matrice[i] == NULL) {
-            perror("Errore nell'allocazione delle colonne");
+            perror("Error: columns allocation failed!");
             exit(EXIT_FAILURE);
         }
     }
@@ -269,21 +271,21 @@ int main(int argc, char** argv) {
 
 
 
-    ///Per usare correttamente TEST SYMBOLS_TO_BYTES bisogna
-    ///impostare i valori di Lora.cr,Lora.has_header,Lora.crc!
-    ///ovviamente i simboli da decodif./codific. devono corrispondere
-    ///ai parametri di Lora con cui sono stati spediti dal TX!
+    ///For testing SYMBOLS_TO_BYTES function you'll need///
+    ///to set Lora.cr,Lora.has_header,Lora.crc!
+    ///the symbols to ENCODE/DECODE must have the same parameters
+    ///of Lora struct with which they were transmitted from TX!
     ///TEST SYMBOLS_TO_BYTES///
 //    int64_t* symbols;
-/*14*///    int64_t symb[] = {97,57,1,77,33,29,61,125,45,106,86,86,91,74,87,45,54,117,86,109,73,106,118,7,34,61,40,36,61,17,119,94,85,86,107,43,86,78,90,83}; ///DATA=1,2,3,4,5,6,7,8,9,10(crc=1,cr=4)///
-/*04*///    int64_t symb[] = {1,5,1,65,29,29,13,121,45,106,86,86,91,74,87,45,54,117,86,109,73,106,118,7,95,61,40,45,60,20,119,94};    ///DATA=1,2,3,4,5,6,7,8,9,10(crc=0,cr=4)///
-/*13*///    int64_t symb[] = {29,53,5,49,37,1,1,97,45,106,86,86,91,74,87,54,117,86,109,73,106,118,34,61,40,36,61,17,119,85,86,107,43,86,78,90};   ///DATA=1,2,3,4,5,6,7,8,9,10(crc=1,cr=3)///
-/*03*///    int64_t symb[] = {125,9,5,61,25,1,49,101,45,106,86,86,91,74,87,54,117,86,109,73,106,118,95,61,40,45,60,20,119};   ///DATA=1,2,3,4,5,6,7,8,9,10(crc=0,cr=3)///
-/*12*///    int64_t symb[] = {97,5,25,49,29,29,13,97,45,106,86,86,91,74,54,117,86,109,73,106,34,61,40,36,61,17,85,86,107,43,86,78};   ///DATA=1,2,3,4,5,6,7,8,9,10(crc=1,cr=2)///
-/*02*///    int64_t symb[] = {1,57,25,61,33,29,61,101,45,106,86,86,91,74,54,117,86,109,73,106,95,61,40,45,60,20}; ///DATA=1,2,3,4,5,6,7,8,9,10(crc=0,cr=2)///
-/*11*///    int64_t symb[] = {97,9,1,49,25,97,1,121,45,106,86,86,16,54,117,86,109,127,34,61,40,36,46,85,86,107,43,64};    //DATA=1,2,3,4,5,6,7,8,9,10(crc=1,cr=1)///
-/*01*///    int64_t symb[] = {1,53,1,61,37,97,49,125,45,106,86,86,16,54,117,86,109,127,95,61,40,45,46};   ///DATA=1,2,3,4,5,6,7,8,9,10(crc=0,cr=1)///
-/*004*///   int64_t symb[] = {77,89,85,85,89,73,41,109,42,84,86,84,46,92,44,26,122,16,95,79,31,72,37,120,86,43,107,75,86,83,86,86};   ///DATA=1,2,3,4,5,6,7,8,9,10(crc=0,hasheader=0,cr=4)///
+/*14*///    int64_t symb[] = {97,57,1,77,33,29,61,125,45,106,86,86,91,74,87,45,54,117,86,109,73,106,118,7,34,61,40,36,61,17,119,94,85,86,107,43,86,78,90,83}; 		///DATA=1,2,3,4,5,6,7,8,9,10(crc=1,cr=4)///
+/*04*///    int64_t symb[] = {1,5,1,65,29,29,13,121,45,106,86,86,91,74,87,45,54,117,86,109,73,106,118,7,95,61,40,45,60,20,119,94};    								///DATA=1,2,3,4,5,6,7,8,9,10(crc=0,cr=4)///
+/*13*///    int64_t symb[] = {29,53,5,49,37,1,1,97,45,106,86,86,91,74,87,54,117,86,109,73,106,118,34,61,40,36,61,17,119,85,86,107,43,86,78,90};   					///DATA=1,2,3,4,5,6,7,8,9,10(crc=1,cr=3)///
+/*03*///    int64_t symb[] = {125,9,5,61,25,1,49,101,45,106,86,86,91,74,87,54,117,86,109,73,106,118,95,61,40,45,60,20,119};   										///DATA=1,2,3,4,5,6,7,8,9,10(crc=0,cr=3)///
+/*12*///    int64_t symb[] = {97,5,25,49,29,29,13,97,45,106,86,86,91,74,54,117,86,109,73,106,34,61,40,36,61,17,85,86,107,43,86,78};   								///DATA=1,2,3,4,5,6,7,8,9,10(crc=1,cr=2)///
+/*02*///    int64_t symb[] = {1,57,25,61,33,29,61,101,45,106,86,86,91,74,54,117,86,109,73,106,95,61,40,45,60,20}; 													///DATA=1,2,3,4,5,6,7,8,9,10(crc=0,cr=2)///
+/*11*///    int64_t symb[] = {97,9,1,49,25,97,1,121,45,106,86,86,16,54,117,86,109,127,34,61,40,36,46,85,86,107,43,64};    											///DATA=1,2,3,4,5,6,7,8,9,10(crc=1,cr=1)///
+/*01*///    int64_t symb[] = {1,53,1,61,37,97,49,125,45,106,86,86,16,54,117,86,109,127,95,61,40,45,46};   															///DATA=1,2,3,4,5,6,7,8,9,10(crc=0,cr=1)///
+/*004*///   int64_t symb[] = {77,89,85,85,89,73,41,109,42,84,86,84,46,92,44,26,122,16,95,79,31,72,37,120,86,43,107,75,86,83,86,86};   								///DATA=1,2,3,4,5,6,7,8,9,10(crc=0,hasheader=0,cr=4)///
 /*    symbols = symb;
     int64_t length_symb = sizeof(symb) / sizeof(symb[0]);
     int64_t plen = Lora.payload_len;
@@ -295,8 +297,9 @@ int main(int argc, char** argv) {
     bytes_dec = symbols_to_bytes(&Lora, symbols, length_symb);*/
 
 
-    ///Per usare correttamente GEN_HEADER bisogna
-    ///impostare i valori di Lora.cr e Lora.crc!
+
+    ///For testing GEN_HEADER function you'll need///
+    ///to set Lora.cr e Lora.crc!
     ///TEST GEN_HEADER///
 /*    int64_t plen = 10;
     Lora.crc = 1;
@@ -307,6 +310,7 @@ int main(int argc, char** argv) {
     for(int64_t i = 0; i < 5 ; i++){
         printf("%"PRId64" ",nibbles[i]);
     }*/
+
 
 
     ///TEST WORD_REDUCE///
@@ -327,7 +331,7 @@ int main(int argc, char** argv) {
     TCP handles reliability and congestion control. It also does error checking and error recovery.
     Erroneous packets are retransmitted from the source to the destination.
 
-    TCP Server –
+    TCP Server Â–
 
     1-using create(), Create TCP socket.
     2-using bind(), Bind the socket to server address.
@@ -335,15 +339,13 @@ int main(int argc, char** argv) {
     4-using accept(), At this point, connection is established between client and server, and they are ready to transfer data.
     5-Go back to Step 3.
 
-    TCP Client –
+    TCP Client Â–
 
     1-Create TCP socket.
     2-connect newly created client socket to server.
 
 
 ///TCP CLIENT CODE///////////////////////////////////////////////////////////////////////////////////////
-
-
 #include <arpa/inet.h> // inet_addr()
 #include <netdb.h>
 #include <stdio.h>
@@ -410,7 +412,5 @@ int main()
 
 	// close the socket
 	close(sockfd);
-}
-
-*/
+}*/
 
