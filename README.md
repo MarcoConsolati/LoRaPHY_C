@@ -7,7 +7,7 @@ This repository is the implementation of the following paper:
 Zhenqiang Xu, Pengjin Xie, Shuai Tong, Jiliang Wang. From Demodulation to Decoding: Towards Complete LoRa PHY Understanding and Implementation. ACM Transactions on Sensor Networks 2022.  
 Avaible at: https://dl.acm.org/doi/10.1145/3546869
 
-And this repository is a complete translation from the Matlab Project [LoRaPHY](https://github.com/jkadbear/LoRaPHY) created by [jkadbear](https://github.com/jkadbear).
+And this repository is a complete translation from the Matlab Project [LoRaPHY](https://github.com/jkadbear/LoRaPHY) created by [jkadbear](https://github.com/jkadbear).  
 Original repository: https://github.com/jkadbear/LoRaPHY
 
 ## Components
