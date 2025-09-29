@@ -96,3 +96,12 @@ int main(int argc, char** argv) {
 ```bash
 gcc yourcode.c utility.c main.c lora_phy.c crc_ccitt.c -lm -lfftw3 -o yourcode
 ```
+
+## Credits
+
+This project is a translation of [LoRaPHY] by [jkadbear], originally written in [MATLAB].  
+Original repository: [https://github.com/jkadbear/LoRaPHY]
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
