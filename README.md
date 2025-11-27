@@ -138,3 +138,8 @@ Original repository: https://github.com/jkadbear/LoRaPHY
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
+
+## 🤝 Code of Conduct
+
+This project adheres to the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md). 
+By participating, you are expected to uphold this code.
