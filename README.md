@@ -2,7 +2,7 @@
 
 ![C Language](https://img.shields.io/badge/C-ANSI_C-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Embedded-orange)
+![Platform](https://img.shields.io/badge/Platform-Windows%2010%20(with%20Code::Blocks%2020.03)%20%7C%20Ubuntu%2020.04.4%20(with%20GCC%20compiler)-orange)
 
 **LoRa Physical Layer Implementation in C** - Complete baseband modulation / demodulation with FFT for Software Defined Radio (SDR) and embedded systems compatible with LoRaWAN network protocol.
 
