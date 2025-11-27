@@ -1,50 +1,78 @@
-## LoRaPHY_C
-LoRaPHY_C is a complete C language implementation of LoRa physical layer, including baseband modulation, baseband demodulation, encoding and decoding.
-LoRaPHY_C is organized as some file.c, file.h and a linked FFTW library for Fast Fourier Transform.
+# LoRaPHY C Implementation
 
-This repository is the implementation of the following paper:
+![C Language](https://img.shields.io/badge/C-ANSI_C-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Platform](https://img.shields.io/badge/Platform-Linux%20%7C%20Embedded-orange)
 
-Zhenqiang Xu, Pengjin Xie, Shuai Tong, Jiliang Wang. From Demodulation to Decoding: Towards Complete LoRa PHY Understanding and Implementation. ACM Transactions on Sensor Networks 2022.  
-Avaible at: https://dl.acm.org/doi/10.1145/3546869
+**LoRa/LoRaWAN Physical Layer Implementation in C** - Complete baseband modulation/demodulation with FFTW for Software Defined Radio (SDR) and embedded systems.
 
-And this repository is a complete translation from the Matlab Project [LoRaPHY](https://github.com/jkadbear/LoRaPHY) created by [jkadbear](https://github.com/jkadbear).  
-Original repository: https://github.com/jkadbear/LoRaPHY
+## 📖 Overview
 
-## Components
-- LoRa Modulator
-- LoRa Demodulator
-- LoRa Encoder
-- LoRa Decoder
+A portable C implementation of the LoRa physical layer, featuring baseband modulation, demodulation, encoding and decoding. Designed for **LoRaWAN networks**, **SDR platforms**, and **embedded IoT devices**.
 
-## Supported features
-- Extremely low SNR demodulation (-20 dB)
-- Clock drift correction
-- All spreading factors (SF = 7,8,9,10,11,12)
-- All code rates (CR = 4/5,4/6,4/7,4/8)
-- Explicit/Implicit PHY header mode
-- PHY header/payload CRC check
-- Low Data Rate Optimization (LDRO)
+## 🔬 Academic Reference
 
-## How to compile and execute
-Git clone this repo or download all the file.c and the file.h in the same directory, create a new project with your preferred IDE and link them all togheter.
-For the Fast Fourier Transform I used the FFTW avaible for different O.S. at the link: https://fftw.org/  
-You'll need to download the file.h of the library(fftw3.h) compatible with your O.S. in the same directory and link it to the project.  
-For calculating the CRC checksum I used another library already included in this repo called "crc_ccitt" created by Lammert Bies and avaible at: https://github.com/lammertb/libcrc
- 
-## Prerequisites
-- GCC compiler
+This repository implements the research from:
+> Zhenqiang Xu, Pengjin Xie, Shuai Tong, Jiliang Wang. *"From Demodulation to Decoding: Towards Complete LoRa PHY Understanding and Implementation"*. ACM Transactions on Sensor Networks 2022.
+
+Available at: https://dl.acm.org/doi/10.1145/3546869
+
+## 🔄 MATLAB Translation
+
+This is a complete C translation of the MATLAB project **[LoRaPHY](https://github.com/jkadbear/LoRaPHY)** by [jkadbear](https://github.com/jkadbear), organized into modular `.c`/`.h` files with FFTW library integration for Fast Fourier Transform.
+
+**Original MATLAB Repository:** https://github.com/jkadbear/LoRaPHY
+
+## ✨ Features & Components
+
+### 🎛️ Core Components
+- **LoRa Modulator** - Baseband signal generation
+- **LoRa Demodulator** - Robust signal reception
+- **LoRa Encoder** - Forward error correction
+- **LoRa Decoder** - Data recovery
+
+### 🚀 Advanced Capabilities
+- **Extremely low SNR demodulation** (-20 dB)
+- **Clock drift correction** for timing recovery
+- **Full spreading factor support** (SF7-SF12)
+- **Multiple code rates** (4/5 to 4/8)
+- **PHY header modes** (Explicit/Implicit)
+- **CRC verification** for header and payload
+- **Low Data Rate Optimization** (LDRO)
+
+
+## 🛠️ Installation & Compilation
+
+### Prerequisites
+- **FFTW3 library** for Fast Fourier Transform ([download here](https://fftw.org/))
+- **C compiler** (GCC recommended)
+- **CRC library** (included via `crc_ccitt` from [Lammert Bies' libcrc](https://github.com/lammertb/libcrc))
 - Ubuntu 20.04+ or compatible Linux
-- MATLAB (for reference comparison)
-- Code::Blocks (or others IDE)
-- Git
+- MATLAB 2023+ (for reference comparison)
+- Code::Blocks for Windows10 (or others IDE)
 
-### Installation
+
+### Using Command Line (Linux/Unix)
 ```bash
+# Clone the repository
 git clone https://github.com/MarcoConsolati/LoRaPHY_C.git
 cd LoRaPHY_C
-make
-./lora_phy_demo
+
+# Install FFTW3 (Ubuntu/Debian example)
+sudo apt-get install libfftw3-dev
+
+# Compile the project
+gcc -o lora_phy *.c -lfftw3 -lm
+
+# Run the executable
+./lora_phy
 ```
+
+## Manual compiling from Linux terminal
+```bash
+gcc main.c lora_phy.c utility.c crc_ccitt.c -lfftw3 -lm -o lora_phy_demo
+```
+
 ## Example of usage
 Below is a complete example showing how to build a LoRaPHY object, encode and modulate a payload, then demodulate and decode it. This demonstrates the full transmission and reception chain using the provided API.
 
@@ -100,11 +128,6 @@ int main(int argc, char** argv) {
     freeLora(&Lora);
     return 0;
 }
-```
-
-## Manual compiling from Linux terminal
-```bash
-gcc yourcode.c utility.c main.c lora_phy.c crc_ccitt.c -lm -lfftw3 -o yourcode
 ```
 
 ## Credits
