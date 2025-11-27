@@ -143,3 +143,7 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 This project adheres to the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md). 
 By participating, you are expected to uphold this code.
+
+[![Security](https://img.shields.io/badge/Security-Policy-blue.svg)](SECURITY.md)
+
+**Security**: Please report vulnerabilities via email as described in our [Security Policy](SECURITY.md).
