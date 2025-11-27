@@ -4,7 +4,7 @@
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Platform](https://img.shields.io/badge/Platform-Windows%2010%20(with%20Code::Blocks%2020.03)%20%7C%20Ubuntu%2020.04.4%20(with%20GCC%20compiler)-orange)
 
-**LoRa Physical Layer Implementation in C** - Complete baseband modulation / demodulation for Software Defined Radio (SDR Adalm-Pluto) and LoRaWAN network protocol compatible.
+**LoRa Physical Layer Implementation in C** - Complete baseband modulation/demodulation compatible with Software Defined Radio (SDR Adalm-Pluto) and LoRaWAN networks.
 
 ## 📖 Overview
 
