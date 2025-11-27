@@ -33,9 +33,18 @@ For calculating the CRC checksum I used another library already included in this
  
 ## Prerequisites
 - GCC compiler
+- Ubuntu 20.04+ or compatible Linux
+- MATLAB (for reference comparison)
 - Code::Blocks (or others IDE)
 - Git
 
+### Installation
+```bash
+git clone https://github.com/MarcoConsolati/LoRaPHY_C.git
+cd LoRaPHY_C
+make
+./lora_phy_demo
+```
 ## Example of usage
 Below is a complete example showing how to build a LoRaPHY object, encode and modulate a payload, then demodulate and decode it. This demonstrates the full transmission and reception chain using the provided API.
 
